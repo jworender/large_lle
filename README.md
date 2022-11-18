@@ -1,9 +1,20 @@
 <!-- badges: start -->
+[![GitHub version](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/jworender/large_lle/master/.version.json&style=flat&logo=github)](https://github.com/jworender/large_lle)
+<!-- badges: end -->
+
+# **Large LASSO Logic Engine**
+
+This project marries the concepts introduced in the LASSO Logic Engine paper  with the big data framework introduced with the "biglasso" package to use this combination for a powerful, scalable, feature selection tool.
+
+## **BIGLASSO Descriptive material**
+<!-- badges: start -->
 [![GitHub version](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/YaohuiZeng/biglasso/master/.version.json&style=flat&logo=github)](https://github.com/YaohuiZeng/biglasso)
 [![CRAN version](https://img.shields.io/cran/v/biglasso?logo=R)](https://cran.r-project.org/package=biglasso)
 [![downloads](https://cranlogs.r-pkg.org/badges/biglasso)](https://cran.r-project.org/package=biglasso)
 [![R-CMD-check](https://github.com/YaohuiZeng/biglasso/workflows/R-CMD-check/badge.svg)](https://github.com/YaohuiZeng/biglasso/actions)
 <!-- badges: end -->
+
+The README that was included with the biglasso repository is included below in case additional information on that project is desired.
 
 # [biglasso: Extend Lasso Model Fitting to Big Data in R](https://yaohuizeng.github.io/biglasso/index.html)
 
