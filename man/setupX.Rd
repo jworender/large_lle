@@ -40,7 +40,7 @@ file-backed \code{big.matrix}. By default, its name is the same as
 \value{
 A \code{big.matrix} object corresponding to a file-backed
 \code{big.matrix}. It's ready to be used as the design matrix \code{X} in
-\code{\link{biglasso}} and \code{\link{cv.biglasso}}.
+\code{\link{largeLLE}} and \code{\link{cv.largelle}}.
 }
 \description{
 Set up the design matrix X as a \code{big.matrix} object based on external
@@ -48,7 +48,7 @@ massive data file stored on disk that cannot be fullly loaded into memory.
 The data file must be a well-formated ASCII-file, and contains only one
 single type. Current version only supports \code{double} type. Other
 restrictions about the data file are described in
-\code{\link{biglasso-package}}. This function reads the massive data, and
+\code{\link{largeLLE-package}}. This function reads the massive data, and
 creates a \code{big.matrix} object. By default, the resulting
 \code{big.matrix} is file-backed, and can be shared across processors or
 nodes of a cluster.
@@ -66,11 +66,11 @@ This function is a simple wrapper of
 details.
 }
 \examples{
-## see the example in "biglasso-package"
+## see the example in "largeLLE-package"
 
 }
 \seealso{
-\code{\link{biglasso}}, \code{\link{cv.ncvreg}}
+\code{\link{largeLLE}}, \code{\link{cv.ncvreg}}
 }
 \author{
 Yaohui Zeng and Patrick Breheny

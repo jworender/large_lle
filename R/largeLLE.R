@@ -102,9 +102,9 @@
 #' fitting. Default is TRUE.
 #' @param verbose Whether to output the timing of each lambda iteration.
 #' Default is FALSE.
-#' @return An object with S3 class \code{"biglasso"} for
+#' @return An object with S3 class \code{"largeLLE"} for
 #' \code{"gaussian", "binomial", "cox"} families, or an object with S3 class
-#' \code{"mbiglasso"} for \code{"mgaussian"} family,  with following variables.
+#' \code{"mlargelle"} for \code{"mgaussian"} family,  with following variables.
 #' \item{beta}{The fitted matrix of coefficients, store in sparse matrix
 #' representation. The number of rows is equal to the number of coefficients,
 #' whereas the number of columns is equal to \code{nlambda}. For \code{"mgaussian"}
@@ -137,7 +137,7 @@
 #'
 #' Maintainer: Yaohui Zeng <yaohui.zeng@@gmail.com> and Chuyi Wang <wwaa0208@@gmail.com>
 #' @seealso \code{\link{largeLLE-package}}, \code{\link{setupX}},
-#' \code{\link{cv.biglasso}}, \code{\link{plot.biglasso}},
+#' \code{\link{cv.largelle}}, \code{\link{plot.largelle}},
 #' \code{\link[ncvreg]{ncvreg}}
 #' @examples
 #' 
@@ -148,10 +148,10 @@
 #' X.bm <- as.big.matrix(X)
 #' # lasso, default
 #' par(mfrow=c(1,2))
-#' fit.lasso <- biglasso(X.bm, y, family = 'gaussian')
+#' fit.lasso <- largeLLE(X.bm, y, family = 'gaussian')
 #' plot(fit.lasso, log.l = TRUE, main = 'lasso')
 #' # elastic net
-#' fit.enet <- biglasso(X.bm, y, penalty = 'enet', alpha = 0.5, family = 'gaussian')
+#' fit.enet <- largeLLE(X.bm, y, penalty = 'enet', alpha = 0.5, family = 'gaussian')
 #' plot(fit.enet, log.l = TRUE, main = 'elastic net, alpha = 0.5')
 #' 
 #' ## Logistic regression
@@ -161,10 +161,10 @@
 #' X.bm <- as.big.matrix(X)
 #' # lasso, default
 #' par(mfrow = c(1, 2))
-#' fit.bin.lasso <- biglasso(X.bm, y, penalty = 'lasso', family = "binomial")
+#' fit.bin.lasso <- largeLLE(X.bm, y, penalty = 'lasso', family = "binomial")
 #' plot(fit.bin.lasso, log.l = TRUE, main = 'lasso')
 #' # elastic net
-#' fit.bin.enet <- biglasso(X.bm, y, penalty = 'enet', alpha = 0.5, family = "binomial")
+#' fit.bin.enet <- largeLLE(X.bm, y, penalty = 'enet', alpha = 0.5, family = "binomial")
 #' plot(fit.bin.enet, log.l = TRUE, main = 'elastic net, alpha = 0.5')
 #' 
 #' ## Cox regression
@@ -178,7 +178,7 @@
 #' tcens <- rbinom(n = N, prob = 0.3, size = 1)  # censoring indicator
 #' y <- cbind(time = ty, status = 1 - tcens)  # y <- Surv(ty, 1 - tcens) with library(survival)
 #' X.bm <- as.big.matrix(X)
-#' fit <- biglasso(X.bm, y, family = "cox")
+#' fit <- largeLLE(X.bm, y, family = "cox")
 #' plot(fit, main = "cox")
 #' 
 #' ## Multiple responses linear regression
@@ -188,10 +188,10 @@
 #' beta = matrix(seq(from=-b,to=b,length.out=s*m),s,m)
 #' y = x[,1:s] %*% beta + matrix(rnorm(n*m,0,1),n,m)
 #' x.bm = as.big.matrix(x)
-#' fit = biglasso(x.bm, y, family = "mgaussian")
+#' fit = largeLLE(x.bm, y, family = "mgaussian")
 #' plot(fit, main = "mgaussian")
 #' 
-#' @export biglasso
+#' @export largeLLE
 largeLLE <- function(X, y, row.idx = 1:nrow(X),
                      penalty = c("lasso", "ridge", "enet"),
                      family = c("gaussian", "binomial", "cox", "mgaussian"), 
@@ -331,7 +331,7 @@ largeLLE <- function(X, y, row.idx = 1:nrow(X),
 
   ## fit model
   if (output.time) {
-    cat("\nStart biglasso: ", format(Sys.time()), '\n')
+    cat("\nStart largeLLE: ", format(Sys.time()), '\n')
   }
   if (family == 'gaussian') {
     time <- system.time(
@@ -568,7 +568,7 @@ largeLLE <- function(X, y, row.idx = 1:nrow(X),
     stop("Current version only supports Gaussian, Binominal or Cox response!")
   }
   if (output.time) {
-    cat("\nEnd biglasso: ", format(Sys.time()), '\n')
+    cat("\nEnd largeLLE: ", format(Sys.time()), '\n')
   }
   # p.keep <- length(col.idx)
   col.idx <- col.idx + 1 # indices (in R) for which variables have scale > 1e-6
@@ -651,7 +651,7 @@ largeLLE <- function(X, y, row.idx = 1:nrow(X),
     return.val$safe_rejections <- safe_rejections
   } 
   if (return.time) return.val$time <- as.numeric(time['elapsed'])
-  if(family == "mgaussian") val <- structure(return.val, class = c("mbiglasso"))
-  else val <- structure(return.val, class = c("biglasso", 'ncvreg'))
+  if(family == "mgaussian") val <- structure(return.val, class = c("mlargelle"))
+  else val <- structure(return.val, class = c("largeLLE", 'ncvreg'))
   val
 }

@@ -3,9 +3,9 @@
 #' Extract predictions (fitted reponse, coefficients, etc.) from a 
 #' fitted \code{\link{largeLLE}} object.
 #' 
-#' @name predict.largelle
-#' @rdname predict.largelle
-#' @method predict largelle
+#' @name predict.largeLLE
+#' @rdname predict.largeLLE
+#' @method predict largeLLE
 #' 
 #' @param object A fitted \code{"largeLLE"} model object.
 #' @param X Matrix of values at which predictions are to be made. It must be a
@@ -57,12 +57,12 @@
 #' predict(fit, type="nvars", lambda=c(0.05, 0.1))
 #' @export
 #' 
-predict.largelle <- function(object, X, row.idx = 1:nrow(X), 
+predict.largeLLE <- function(object, X, row.idx = 1:nrow(X), 
                              type = c("link", "response", "class", 
                                     "coefficients", "vars", "nvars"),
                              lambda, which = 1:length(object$lambda), ...) {
   type <- match.arg(type)
-  beta <- coef.largelle(object, lambda=lambda, which=which, drop=FALSE)
+  beta <- coef.largeLLE(object, lambda=lambda, which=which, drop=FALSE)
   if (type=="coefficients") return(beta)
   if (class(object)[1]=="largeLLE" && object$family != "cox") {
     alpha <- beta[1,]
@@ -99,7 +99,7 @@ predict.largelle <- function(object, X, row.idx = 1:nrow(X),
 }
 
 #' @method predict mlargelle
-#' @rdname predict.largelle
+#' @rdname predict.largeLLE
 #' @export
 #'
 predict.mlargelle <- function(object, X, row.idx = 1:nrow(X), 
@@ -107,7 +107,7 @@ predict.mlargelle <- function(object, X, row.idx = 1:nrow(X),
                                       "coefficients", "vars", "nvars"),
                              lambda, which = 1:length(object$lambda), k = 1, ...) {
   type <- match.arg(type)
-  beta <- coef.largelle(object, lambda=lambda, which=which, drop=FALSE)[[k]]
+  beta <- coef.largeLLE(object, lambda=lambda, which=which, drop=FALSE)[[k]]
   if (type=="coefficients") return(beta)
   if (class(object)[1]=="largeLLE") {
     alpha <- beta[1,]
@@ -129,11 +129,11 @@ predict.mlargelle <- function(object, X, row.idx = 1:nrow(X),
   return(eta)
 }
 
-#' @method coef largelle
-#' @rdname predict.largelle
+#' @method coef largeLLE
+#' @rdname predict.largeLLE
 #' @export
 #'
-coef.largelle <- function(object, lambda, which = 1:length(object$lambda), drop = TRUE, ...) {
+coef.largeLLE <- function(object, lambda, which = 1:length(object$lambda), drop = TRUE, ...) {
   if (!missing(lambda)) {
     ind <- approx(object$lambda,seq(object$lambda),lambda)$y
     l <- floor(ind)
@@ -147,7 +147,7 @@ coef.largelle <- function(object, lambda, which = 1:length(object$lambda), drop 
 }
 
 #' @method coef mlargelle
-#' @rdname predict.largelle
+#' @rdname predict.largeLLE
 #' @export
 #'
 coef.mlargelle <- function(object, lambda, which = 1:length(object$lambda), intercept = TRUE, ...) {
