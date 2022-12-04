@@ -1,5 +1,5 @@
 library(testthat)
-library(biglasso)
+library(largeLLE)
 library(glmnet)
 
 context("Testing logistic regression:")
@@ -20,25 +20,25 @@ glmnet.control(fdev = 0, devmax = 1)
 fit.glm <- glmnet(X, y, family = 'binomial', thresh = eps, lambda.min.ratio = 0)
 
 X.bm <- as.big.matrix(X)
-fit.ssr <- biglasso(X.bm, y, family = 'binomial', eps = eps, lambda.min = 0)
-fit.ssr.mm <- biglasso(X.bm, y, family = 'binomial', eps = eps, alg.logistic = 'MM', lambda.min = 0)
-fit.hybrid <- biglasso(X.bm, y, family = 'binomial', eps = eps, screen = 'Hybrid', lambda.min = 0)
-fit.adaptive <- biglasso(X.bm, y, family = 'binomial', eps = eps, screen = 'Adaptive', lambda.min = 0)
+fit.ssr <- largeLLE(X.bm, y, family = 'binomial', eps = eps, lambda.min = 0)
+fit.ssr.mm <- largeLLE(X.bm, y, family = 'binomial', eps = eps, alg.logistic = 'MM', lambda.min = 0)
+fit.hybrid <- largeLLE(X.bm, y, family = 'binomial', eps = eps, screen = 'Hybrid', lambda.min = 0)
+fit.adaptive <- largeLLE(X.bm, y, family = 'binomial', eps = eps, screen = 'Adaptive', lambda.min = 0)
 
 
 cv.ind <- rep(1:10, 10)
 
-cv.default <- cv.biglasso(X.bm, y, family = 'binomial',
+cv.default <- cv.largelle(X.bm, y, family = 'binomial',
   eps = eps, nfolds = 10, cv.ind = cv.ind, eval.metric = "default", ncores = 1)
-cv.default.ungrouped <- cv.biglasso(X.bm, y, family = 'binomial',
+cv.default.ungrouped <- cv.largelle(X.bm, y, family = 'binomial',
   eps = eps, nfolds = 10, cv.ind = cv.ind, eval.metric = "default", ncores = 1, grouped = FALSE)
 
-cv.auc <- cv.biglasso(X.bm, y, eval.metric = "auc", family = 'binomial',
+cv.auc <- cv.largelle(X.bm, y, eval.metric = "auc", family = 'binomial',
   eps = eps, nfolds = 10, cv.ind = cv.ind, ncores = 1)
 
-cv.class <- cv.biglasso(X.bm, y, eval.metric = "class", family = 'binomial',
+cv.class <- cv.largelle(X.bm, y, eval.metric = "class", family = 'binomial',
   eps = eps, nfolds = 10, cv.ind = cv.ind, ncores = 1)
-cv.class.ungrouped <- cv.biglasso(X.bm, y, eval.metric = "class", family = 'binomial',
+cv.class.ungrouped <- cv.largelle(X.bm, y, eval.metric = "class", family = 'binomial',
   eps = eps, nfolds = 10, cv.ind = cv.ind, ncores = 1, grouped = FALSE)
 
 cv.glmnet.default <- cv.glmnet(X, y, family = 'binomial',

@@ -14,9 +14,9 @@ This project marries the concepts introduced in the LASSO Logic Engine paper  wi
 [![R-CMD-check](https://github.com/YaohuiZeng/biglasso/workflows/R-CMD-check/badge.svg)](https://github.com/YaohuiZeng/biglasso/actions)
 <!-- badges: end -->
 
-The README that was included with the biglasso repository is included below in case additional information on that project is desired.
+The README that was included with the biglasso repository is adapted below for additional information on that project and how it relates to this one.
 
-# [biglasso: Extend Lasso Model Fitting to Big Data in R](https://yaohuizeng.github.io/biglasso/index.html)
+## [biglasso: Extend Lasso Model Fitting to Big Data in R (website)](https://yaohuizeng.github.io/biglasso/index.html)
 
 `biglasso` extends lasso and elastic-net linear and logistic regression models for ultrahigh-dimensional, multi-gigabyte data sets that cannot be loaded into memory. It utilizes memory-mapped files to store the massive data on the disk and only read those into memory whenever necessary during model fitting. Moreover, some advanced feature screening rules are proposed and implemented to accelerate the model fitting. **As a result, this package is much more memory- and computation-efficient and highly scalable as compared to existing lasso-fitting packages such as [glmnet](https://CRAN.R-project.org/package=glmnet) and [ncvreg](https://CRAN.R-project.org/package=ncvreg)**. Bechmarking experiments using both simulated and real data sets show that `biglasso` is not only 1.5x to 4x times faster than existing packages, but also at least 2x more memory-efficient. More importantly, to the best of our knowledge, `biglasso` is the first R package that enables users to fit lasso models with data sets that are larger than available RAM, thus allowing for powerful big data analysis on an ordinary laptop.
 
@@ -130,16 +130,10 @@ Since other three packages cannot handle this data-larger-than-RAM case, we comp
 
 ## Installation:
 
-To install the latest stable release version from CRAN:
+To install the latest development version of **this project** (not biglasso) from GitHub:
 
 ```r
-install.packages("biglasso")
-```
-
-To install the latest development version from GitHub:
-
-```r
-remotes::install_github("YaohuiZeng/biglasso")
+remotes::install_github("jworender/large_lle")
 ```
 
 ## Reference:
@@ -152,4 +146,4 @@ remotes::install_github("YaohuiZeng/biglasso")
 * Wang, J., Zhou, J., Liu, J., Wonka, P., and Ye, J. (2014). A safe screening rule for sparse logistic regression. In Advances in Neural Information Processing Systems, pp. 1053-1061.
 
 ## Report bugs：
-* open an [issue](https://github.com/YaohuiZeng/biglasso/issues) or send an email to Patrick Breheny at <patrick-breheny@uiowa.edu>
+* open an [issue](https://github.com/jworender/large_lle/issues) or send an email to Jason Orender at <joren001@odu.edu>

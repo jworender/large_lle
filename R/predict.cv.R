@@ -1,16 +1,16 @@
-#' Model predictions based on a fitted \code{\link{cv.biglasso}} object
+#' Model predictions based on a fitted \code{\link{cv.largelle}} object
 #'
-#' Extract predictions from a fitted \code{\link{cv.biglasso}} object.
+#' Extract predictions from a fitted \code{\link{cv.largelle}} object.
 #'
-#' @name predict.cv.biglasso
-#' @rdname predict.cv.biglasso
-#' @method predict cv.biglasso
+#' @name predict.cv.largelle
+#' @rdname predict.cv.largelle
+#' @method predict cv.largelle
 #'
-#' @param object A fitted \code{"cv.biglasso"} model object.
+#' @param object A fitted \code{"cv.largelle"} model object.
 #' @param X Matrix of values at which predictions are to be made. It must be a
 #' \code{\link[bigmemory]{big.matrix}} object. Not used for
 #' \code{type="coefficients"}.
-#' @param row.idx Similar to that in \code{\link[biglasso]{biglasso}}, it's a
+#' @param row.idx Similar to that in \code{\link[largeLLE]{largeLLE}}, it's a
 #' vector of the row indices of \code{X} that used for the prediction.
 #' \code{1:nrow(X)} by default.
 #' @param type Type of prediction: \code{"link"} returns the linear predictors;
@@ -35,17 +35,17 @@
 #' @author Yaohui Zeng and Patrick Breheny
 #'
 #' Maintainer: Yaohui Zeng <yaohui.zeng@@gmail.com>
-#' @seealso \code{\link{biglasso}}, \code{\link{cv.biglasso}}
+#' @seealso \code{\link{largeLLE}}, \code{\link{cv.largelle}}
 #' @keywords models regression
 #' @examples
 #' \dontrun{
-#' ## predict.cv.biglasso
+#' ## predict.cv.largelle
 #' data(colon)
 #' X <- colon$X
 #' y <- colon$y
 #' X.bm <- as.big.matrix(X, backingfile = "")
-#' fit <- biglasso(X.bm, y, penalty = 'lasso', family = "binomial")
-#' cvfit <- cv.biglasso(X.bm, y, penalty = 'lasso', family = "binomial", seed = 1234, ncores = 2)
+#' fit <- largeLLE(X.bm, y, penalty = 'lasso', family = "binomial")
+#' cvfit <- cv.largelle(X.bm, y, penalty = 'lasso', family = "binomial", seed = 1234, ncores = 2)
 #' coef <- coef(cvfit)
 #' coef[which(coef != 0)]
 #' predict(cvfit, X.bm, type = "response")
@@ -55,7 +55,7 @@
 #' }
 #' @export
 #'
-predict.cv.biglasso <- function(object, X, row.idx = 1:nrow(X),
+predict.cv.largelle <- function(object, X, row.idx = 1:nrow(X),
                                 type = c("link","response","class",
                                          "coefficients","vars","nvars"),
                                 lambda = object$lambda.min,
@@ -65,14 +65,14 @@ predict.cv.biglasso <- function(object, X, row.idx = 1:nrow(X),
     lambda <- object[[lambda]]
   }
   type <- match.arg(type)
-  predict.biglasso(object$fit, X = X, row.idx = row.idx, type = type,
+  predict.largelle(object$fit, X = X, row.idx = row.idx, type = type,
                    lambda = lambda, which = which, ...)
 }
 
-#' @method coef cv.biglasso
-#' @rdname predict.cv.biglasso
+#' @method coef cv.largelle
+#' @rdname predict.cv.largelle
 #' @export
 #'
-coef.cv.biglasso <- function(object, lambda = object$lambda.min, which = object$min, ...) {
-  coef.biglasso(object$fit, lambda = lambda, which = which, ...)
+coef.cv.largelle <- function(object, lambda = object$lambda.min, which = object$min, ...) {
+  coef.largelle(object$fit, lambda = lambda, which = which, ...)
 }

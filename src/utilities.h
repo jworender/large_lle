@@ -16,7 +16,7 @@
 #include "bigmemory/MatrixAccessor.hpp"
 #include "bigmemory/bigmemoryDefines.h"
 
-#include "biglasso_omp.h"
+#include "largelle_omp.h"
 //#include "defines.h"
 
 #ifndef UTILITIES_H

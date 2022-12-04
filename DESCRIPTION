@@ -1,21 +1,28 @@
-Package: biglasso
-Version: 1.5.2
-Date: 2022-10-05
-Title: Extending Lasso Model Fitting to Big Data
+Package: largeLLE
+Version: 0.0.0
+Date: 2022-12-04
+Title: Expanding BigLASSO to use the LASSO Logic Engine
 Authors@R: c(
+    person("Orender", "Jason", role = c("aut"),
+      email="joren001@odu.edu", comment=c(ORCID="0000-0001-7396-9996")),
     person("Yaohui", "Zeng", role = c("aut")),
     person("Chuyi", "Wang", role = c("aut")),
     person("Patrick", "Breheny", role=c("aut","cre"),
       email="patrick-breheny@uiowa.edu", comment=c(ORCID="0000-0002-0650-1119")))
-Maintainer: Patrick Breheny <patrick-breheny@uiowa.edu>
-Description: Extend lasso and elastic-net model fitting for ultra
-    high-dimensional, multi-gigabyte data sets that cannot be loaded into
-    memory. Designed to be more memory- and computation-efficient than existing
-    lasso-fitting packages like 'glmnet' and 'ncvreg', thus allowing
-    the user to analyze big data analysis even on an ordinary laptop.
+Maintainer: Jason Orender <joren001@odu.edu>
+Description: The BigLASSO package extended lasso and elastic-net model fitting
+    for ultra high-dimensional, multi-gigabyte data sets that could not be
+    loaded into memory. It was designed to be more memory- and computationally-
+    efficient than existing lasso-fitting packages like 'glmnet' and 'ncvreg',
+    thus allowing the user to analyze big data analysis even on an ordinary
+    laptop. The largeLLE expansion uses the BigLASSO base code, but adds the
+    functionality to use the LASSO Logic Engine, a feature selection and
+    LASSO fitting algorithm which implements a data transformation prior to
+    fitting.  This project forks the 1.5.2 version of BigLASSO and retains the
+    same licensing arrangements.
 License: GPL-3
-URL: https://yaohuizeng.github.io/biglasso/index.html, https://github.com/YaohuiZeng/biglasso, https://arxiv.org/abs/1701.05936
-BugReports: https://github.com/YaohuiZeng/biglasso/issues
+URL: https://github.com/jworender/large_lle, https://yaohuizeng.github.io/biglasso/index.html, https://github.com/YaohuiZeng/biglasso, https://arxiv.org/abs/1701.05936
+BugReports: https://github.com/jworender/large_lle/issues
 Depends: R (>= 3.2.0), bigmemory (>= 4.5.0), Matrix, ncvreg
 Imports: Rcpp (>= 0.12.1), methods
 LinkingTo: Rcpp, RcppArmadillo (>= 0.8.600), bigmemory, BH

@@ -474,7 +474,7 @@ RcppExport SEXP cdfit_cox(SEXP X_, SEXP y_, SEXP d_, SEXP d_idx_, SEXP row_idx_,
   
   // set up omp
   int useCores = INTEGER(ncore_)[0];
-#ifdef BIGLASSO_OMP_H_
+#ifdef LARGELLE_OMP_H_
   int haveCores = omp_get_num_procs();
   if(useCores < 1) {
     useCores = haveCores;
@@ -715,7 +715,7 @@ RcppExport SEXP cdfit_cox_ssr(SEXP X_, SEXP y_, SEXP d_, SEXP d_idx_, SEXP row_i
   
   // set up omp
   int useCores = INTEGER(ncore_)[0];
-#ifdef BIGLASSO_OMP_H_
+#ifdef LARGELLE_OMP_H_
   int haveCores = omp_get_num_procs();
   if(useCores < 1) {
     useCores = haveCores;
@@ -986,7 +986,7 @@ RcppExport SEXP cdfit_cox_scox(SEXP X_, SEXP y_, SEXP d_, SEXP d_idx_, SEXP row_
   
   // set up omp
   int useCores = INTEGER(ncore_)[0];
-#ifdef BIGLASSO_OMP_H_
+#ifdef LARGELLE_OMP_H_
   int haveCores = omp_get_num_procs();
   if(useCores < 1) {
     useCores = haveCores;
@@ -1262,7 +1262,7 @@ RcppExport SEXP cdfit_cox_sscox(SEXP X_, SEXP y_, SEXP d_, SEXP d_idx_, SEXP row
   
   // set up omp
   int useCores = INTEGER(ncore_)[0];
-#ifdef BIGLASSO_OMP_H_
+#ifdef LARGELLE_OMP_H_
   int haveCores = omp_get_num_procs();
   if(useCores < 1) {
     useCores = haveCores;
@@ -1551,7 +1551,7 @@ RcppExport SEXP cdfit_cox_ada_scox(SEXP X_, SEXP y_, SEXP d_, SEXP d_idx_, SEXP 
   
   // set up omp
   int useCores = INTEGER(ncore_)[0];
-#ifdef BIGLASSO_OMP_H_
+#ifdef LARGELLE_OMP_H_
   int haveCores = omp_get_num_procs();
   if(useCores < 1) {
     useCores = haveCores;
@@ -1871,7 +1871,7 @@ RcppExport SEXP cdfit_cox_safe(SEXP X_, SEXP y_, SEXP d_, SEXP d_idx_, SEXP row_
   
   // set up omp
   int useCores = INTEGER(ncore_)[0];
-#ifdef BIGLASSO_OMP_H_
+#ifdef LARGELLE_OMP_H_
   int haveCores = omp_get_num_procs();
   if(useCores < 1) {
     useCores = haveCores;

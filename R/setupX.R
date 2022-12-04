@@ -8,7 +8,7 @@
 #' The data file must be a well-formated ASCII-file, and contains only one
 #' single type. Current version only supports \code{double} type. Other
 #' restrictions about the data file are described in
-#' \code{\link{biglasso-package}}. This function reads the massive data, and
+#' \code{\link{largeLLE-package}}. This function reads the massive data, and
 #' creates a \code{big.matrix} object. By default, the resulting
 #' \code{big.matrix} is file-backed, and can be shared across processors or
 #' nodes of a cluster.
@@ -41,13 +41,13 @@
 #' \code{\link[bigmemory]{read.big.matrix}}.
 #' @return A \code{big.matrix} object corresponding to a file-backed
 #' \code{big.matrix}. It's ready to be used as the design matrix \code{X} in
-#' \code{\link{biglasso}} and \code{\link{cv.biglasso}}.
+#' \code{\link{largeLLE}} and \code{\link{cv.largelle}}.
 #' @author Yaohui Zeng and Patrick Breheny
 #' 
 #' Maintainer: Yaohui Zeng <yaohui.zeng@@gmail.com>
-#' @seealso \code{\link{biglasso}}, \code{\link{cv.ncvreg}}
+#' @seealso \code{\link{largeLLE}}, \code{\link{cv.ncvreg}}
 #' @examples
-#' ## see the example in "biglasso-package"
+#' ## see the example in "largeLLE-package"
 #' 
 #' @export setupX
 #' 

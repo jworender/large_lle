@@ -1,17 +1,17 @@
-#' Model predictions based on a fitted \code{biglasso} object
+#' Model predictions based on a fitted \code{largeLLE} object
 #' 
 #' Extract predictions (fitted reponse, coefficients, etc.) from a 
-#' fitted \code{\link{biglasso}} object.
+#' fitted \code{\link{largeLLE}} object.
 #' 
-#' @name predict.biglasso
-#' @rdname predict.biglasso
-#' @method predict biglasso
+#' @name predict.largelle
+#' @rdname predict.largelle
+#' @method predict largelle
 #' 
-#' @param object A fitted \code{"biglasso"} model object.
+#' @param object A fitted \code{"largeLLE"} model object.
 #' @param X Matrix of values at which predictions are to be made. It must be a
 #' \code{\link[bigmemory]{big.matrix}} object. Not used for
 #' \code{type="coefficients"}.
-#' @param row.idx Similar to that in \code{\link[biglasso]{biglasso}}, it's a
+#' @param row.idx Similar to that in \code{\link[largeLLE]{largeLLE}}, it's a
 #' vector of the row indices of \code{X} that used for the prediction.
 #' \code{1:nrow(X)} by default.
 #' @param type Type of prediction: \code{"link"} returns the linear predictors;
@@ -39,7 +39,7 @@
 #' @author Yaohui Zeng and Patrick Breheny
 #' 
 #' Maintainer: Yaohui Zeng <yaohui.zeng@@gmail.com>
-#' @seealso \code{\link{biglasso}}, \code{\link{cv.biglasso}}
+#' @seealso \code{\link{largeLLE}}, \code{\link{cv.largelle}}
 #' @keywords models regression
 #' @examples
 #' ## Logistic regression
@@ -47,7 +47,7 @@
 #' X <- colon$X
 #' y <- colon$y
 #' X.bm <- as.big.matrix(X, backingfile = "")
-#' fit <- biglasso(X.bm, y, penalty = 'lasso', family = "binomial")
+#' fit <- largeLLE(X.bm, y, penalty = 'lasso', family = "binomial")
 #' coef <- coef(fit, lambda=0.05, drop = TRUE)
 #' coef[which(coef != 0)]
 #' predict(fit, X.bm, type="link", lambda=0.05)[1:10]
@@ -57,14 +57,14 @@
 #' predict(fit, type="nvars", lambda=c(0.05, 0.1))
 #' @export
 #' 
-predict.biglasso <- function(object, X, row.idx = 1:nrow(X), 
+predict.largelle <- function(object, X, row.idx = 1:nrow(X), 
                              type = c("link", "response", "class", 
                                     "coefficients", "vars", "nvars"),
                              lambda, which = 1:length(object$lambda), ...) {
   type <- match.arg(type)
-  beta <- coef.biglasso(object, lambda=lambda, which=which, drop=FALSE)
+  beta <- coef.largelle(object, lambda=lambda, which=which, drop=FALSE)
   if (type=="coefficients") return(beta)
-  if (class(object)[1]=="biglasso" && object$family != "cox") {
+  if (class(object)[1]=="largeLLE" && object$family != "cox") {
     alpha <- beta[1,]
     beta <- beta[-1,,drop=FALSE]
   }
@@ -98,18 +98,18 @@ predict.biglasso <- function(object, X, row.idx = 1:nrow(X),
   }
 }
 
-#' @method predict mbiglasso
-#' @rdname predict.biglasso
+#' @method predict mlargelle
+#' @rdname predict.largelle
 #' @export
 #'
-predict.mbiglasso <- function(object, X, row.idx = 1:nrow(X), 
+predict.mlargelle <- function(object, X, row.idx = 1:nrow(X), 
                              type = c("link", "response", 
                                       "coefficients", "vars", "nvars"),
                              lambda, which = 1:length(object$lambda), k = 1, ...) {
   type <- match.arg(type)
-  beta <- coef.biglasso(object, lambda=lambda, which=which, drop=FALSE)[[k]]
+  beta <- coef.largelle(object, lambda=lambda, which=which, drop=FALSE)[[k]]
   if (type=="coefficients") return(beta)
-  if (class(object)[1]=="biglasso") {
+  if (class(object)[1]=="largeLLE") {
     alpha <- beta[1,]
     beta <- beta[-1,,drop=FALSE]
   }
@@ -129,11 +129,11 @@ predict.mbiglasso <- function(object, X, row.idx = 1:nrow(X),
   return(eta)
 }
 
-#' @method coef biglasso
-#' @rdname predict.biglasso
+#' @method coef largelle
+#' @rdname predict.largelle
 #' @export
 #'
-coef.biglasso <- function(object, lambda, which = 1:length(object$lambda), drop = TRUE, ...) {
+coef.largelle <- function(object, lambda, which = 1:length(object$lambda), drop = TRUE, ...) {
   if (!missing(lambda)) {
     ind <- approx(object$lambda,seq(object$lambda),lambda)$y
     l <- floor(ind)
@@ -146,11 +146,11 @@ coef.biglasso <- function(object, lambda, which = 1:length(object$lambda), drop 
   if (drop) return(drop(beta)) else return(beta)
 }
 
-#' @method coef mbiglasso
-#' @rdname predict.biglasso
+#' @method coef mlargelle
+#' @rdname predict.largelle
 #' @export
 #'
-coef.mbiglasso <- function(object, lambda, which = 1:length(object$lambda), intercept = TRUE, ...) {
+coef.mlargelle <- function(object, lambda, which = 1:length(object$lambda), intercept = TRUE, ...) {
   nclass = length(object$beta)
   beta = list()
   if(intercept) col.idx = 1:nrow(object$beta[[1]])

@@ -229,7 +229,7 @@ RcppExport SEXP cdfit_binomial_ssr(SEXP X_, SEXP y_, SEXP row_idx_,
   
   // set up omp
   int useCores = INTEGER(ncore_)[0];
-#ifdef BIGLASSO_OMP_H_
+#ifdef LARGELLE_OMP_H_
   int haveCores = omp_get_num_procs();
   if(useCores < 1) {
     useCores = haveCores;
@@ -487,7 +487,7 @@ RcppExport SEXP cdfit_binomial_ssr_approx(SEXP X_, SEXP y_, SEXP row_idx_,
   
   // set up omp
   int useCores = INTEGER(ncore_)[0];
-#ifdef BIGLASSO_OMP_H_
+#ifdef LARGELLE_OMP_H_
   int haveCores = omp_get_num_procs();
   if(useCores < 1) {
     useCores = haveCores;
@@ -748,7 +748,7 @@ RcppExport SEXP cdfit_binomial_slores_ssr(SEXP X_, SEXP y_, SEXP n_pos_, SEXP yl
   
   // set up omp
   int useCores = INTEGER(ncore_)[0];
-#ifdef BIGLASSO_OMP_H_
+#ifdef LARGELLE_OMP_H_
   int haveCores = omp_get_num_procs();
   if(useCores < 1) {
     useCores = haveCores;
@@ -1067,7 +1067,7 @@ RcppExport SEXP cdfit_binomial_ada_slores_ssr(SEXP X_, SEXP y_, SEXP n_pos_, SEX
   
   // set up omp
   int useCores = INTEGER(ncore_)[0];
-#ifdef BIGLASSO_OMP_H_
+#ifdef LARGELLE_OMP_H_
   int haveCores = omp_get_num_procs();
   if(useCores < 1) {
     useCores = haveCores;

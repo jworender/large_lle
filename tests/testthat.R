@@ -1,4 +1,4 @@
 library(testthat)
-library(biglasso)
+library(largeLLE)
 
-test_check("biglasso")
+test_check("largeLLE")

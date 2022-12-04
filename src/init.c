@@ -113,7 +113,7 @@ extern SEXP cdfit_gaussian_bedpp_ssr(SEXP X_, SEXP y_, SEXP row_idx_,
                                      SEXP safe_thresh_,
                                      SEXP verbose_);
 
-extern SEXP _biglasso_get_eta(SEXP xPSEXP, SEXP row_idx_SEXP, SEXP betaSEXP, SEXP idx_pSEXP, SEXP idx_lSEXP);
+extern SEXP _largeLLE_get_eta(SEXP xPSEXP, SEXP row_idx_SEXP, SEXP betaSEXP, SEXP idx_pSEXP, SEXP idx_lSEXP);
 
 static R_CallMethodDef callMethods[] = {
   {"cdfit_mgaussian_ssr", (DL_FUNC) &cdfit_mgaussian_ssr, 15},
@@ -131,11 +131,11 @@ static R_CallMethodDef callMethods[] = {
   {"cdfit_gaussian_ada_edpp_ssr", (DL_FUNC) &cdfit_gaussian_ada_edpp_ssr, 16},
   {"cdfit_gaussian_ssr", (DL_FUNC) &cdfit_gaussian_ssr, 15},
   {"cdfit_gaussian_bedpp_ssr", (DL_FUNC) &cdfit_gaussian_bedpp_ssr, 16},
-  {"_biglasso_get_eta", (DL_FUNC) &_biglasso_get_eta, 5},
+  {"_largeLLE_get_eta", (DL_FUNC) &_largeLLE_get_eta, 5},
   {NULL, NULL, 0}
 };
 
-void R_init_biglasso(DllInfo *dll) {
+void R_init_largeLLE(DllInfo *dll) {
   R_registerRoutines(dll,NULL,callMethods,NULL,NULL);
   R_useDynamicSymbols(dll, FALSE);
 }
