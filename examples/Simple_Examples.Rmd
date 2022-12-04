@@ -1,0 +1,46 @@
+---
+title: "Simple Examples"
+author: "Jason Orender"
+date: "2022-12-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(largeLLE)
+```
+
+## Introduction
+
+This is a set of simple examples meant to demonstrate basic usage as a
+complement to the included vignettes.
+
+### Binary Classification
+
+This example fits binary classification data using a standard LASSO.  The colored
+lines in the plot indicate the coefficient sizes at each lambda hyperparameter.
+
+```{r}
+ path <- system.file("data", package = "largeLLE")
+ load(paste0(path,"/colon.RData"))
+ message(sprintf("<< %d rows loaded, with %d features. >>", dim(colon$X)[1], dim(colon$X)[2]))
+ 
+ llle_fit <- largeLLE(as.big.matrix(colon$X), as.matrix(colon$y), penalty = "lasso",
+                      family = "binomial")
+ 
+ plot(llle_fit)
+```
+Predicting new values of the respondent variable occurs in the standard way. Note
+that a set of results for each lambda hyperparameter will be calculated (default
+100 in most cases where the solution converges).
+
+```{r}
+pred <- predict(llle_fit, as.big.matrix(colon$X), type = "response")
+
+best_lambda <- which.min(llle_fit$lambda)
+results     <- pred[,best_lambda]
+names(results) <- colon$y
+results     <- sort(results)
+plot(1:length(results), results, col = (as.numeric(names(results)) + 1), pch = 20,
+     xlab = "Sorted Example", ylab = "Response")
+```

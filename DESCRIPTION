@@ -1,5 +1,5 @@
 Package: largeLLE
-Version: 0.0.0
+Version: 0.0.1
 Date: 2022-12-04
 Title: Expanding BigLASSO to use the LASSO Logic Engine
 Authors@R: c(
